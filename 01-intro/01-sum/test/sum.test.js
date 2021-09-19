@@ -1,4 +1,4 @@
-const sum = require('../sum');
+const sum = require('../sum').default;
 const expect = require('chai').expect;
 
 describe('intro/sum', () => {
@@ -16,6 +16,6 @@ describe('intro/sum', () => {
       it('бросает TypeError, если аргументы - не числа', () => {
         expect(() => sum(a, b)).throw(TypeError);
       });
-    })
+    });
   });
 });

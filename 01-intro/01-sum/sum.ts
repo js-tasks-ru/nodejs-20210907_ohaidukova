@@ -11,4 +11,4 @@ function sum(...args: number[]): number {
   return result;
 }
 
-module.exports = sum;
+export default sum;

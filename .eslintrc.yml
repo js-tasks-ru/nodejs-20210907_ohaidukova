@@ -3,6 +3,7 @@ env:
   es6: true
   node: true
 extends: google
+sourceType: module,
 parserOptions:
   ecmaVersion: 2018
 rules:
