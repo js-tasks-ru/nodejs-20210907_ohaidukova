@@ -1,4 +1,4 @@
-const server = require('../server');
+const server = require('../server').default;
 const http = require('http');
 const expect = require('chai').expect;
 const fse = require('fs-extra');
@@ -26,25 +26,26 @@ describe('streams/file-server-delete', () => {
     describe('DELETE', () => {
       it('файл должен удаляться', (done) => {
         fse.copyFileSync(
-            path.join(fixturesFolder, 'small.png'),
-            path.join(filesFolder, 'small.png'),
+          path.join(fixturesFolder, 'small.png'),
+          path.join(filesFolder, 'small.png')
         );
 
         const request = http.request(
-            'http://localhost:3001/small.png',
-            {method: 'DELETE'},
-            (response) => {
-              expect(response.statusCode).to.equal(200);
+          'http://localhost:3001/small.png',
+          { method: 'DELETE' },
+          (response) => {
+            expect(response.statusCode).to.equal(200);
 
-              setTimeout(() => {
-                expect(
-                    fse.existsSync(path.join(filesFolder, 'small.png')),
-                    'файл small.png не должен оставаться на диске'
-                ).to.be.false;
+            setTimeout(() => {
+              expect(
+                fse.existsSync(path.join(filesFolder, 'small.png')),
+                'файл small.png не должен оставаться на диске'
+              ).to.be.false;
 
-                done();
-              }, 100);
-            });
+              done();
+            }, 100);
+          }
+        );
 
         request.on('error', done);
         request.end();
@@ -52,12 +53,13 @@ describe('streams/file-server-delete', () => {
 
       it('если файла нет - ошибка 404', (done) => {
         const request = http.request(
-            'http://localhost:3001/small.png',
-            {method: 'DELETE'},
-            (response) => {
-              expect(response.statusCode).to.equal(404);
-              done();
-            });
+          'http://localhost:3001/small.png',
+          { method: 'DELETE' },
+          (response) => {
+            expect(response.statusCode).to.equal(404);
+            done();
+          }
+        );
 
         request.on('error', done);
         request.end();
@@ -65,12 +67,13 @@ describe('streams/file-server-delete', () => {
 
       it('если путь вложенный - возвращается ошибка 400', (done) => {
         const request = http.request(
-            'http://localhost:3001/nested/path',
-            {method: 'DELETE'},
-            (response) => {
-              expect(response.statusCode, 'статус код ответа 400').to.equal(400);
-              done();
-            });
+          'http://localhost:3001/nested/path',
+          { method: 'DELETE' },
+          (response) => {
+            expect(response.statusCode, 'статус код ответа 400').to.equal(400);
+            done();
+          }
+        );
 
         request.on('error', done);
         request.end();
