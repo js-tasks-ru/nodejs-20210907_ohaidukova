@@ -9,7 +9,8 @@
         "experimentalDecorators": true,
         "skipLibCheck": true,
         "lib": [
-            "ESNext"
+            "ESNext",
+            "DOM"
         ],
     },
     "exclude": [
