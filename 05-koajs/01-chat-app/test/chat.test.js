@@ -1,5 +1,5 @@
 const axios = require('axios');
-const app = require('../app');
+const app = require('../app').default;
 const expect = require('chai').expect;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -36,8 +36,11 @@ describe('koajs/chat-app', () => {
 
         const messages = await subscribers;
 
-        messages.forEach(response => {
-          expect(response.data, 'каждый подписчик должен получить исходное сообщение').to.equal(message);
+        messages.forEach((response) => {
+          expect(
+            response.data,
+            'каждый подписчик должен получить исходное сообщение'
+          ).to.equal(message);
         });
       });
 
@@ -55,9 +58,13 @@ describe('koajs/chat-app', () => {
 
         await sleep(50);
 
-        await axios.post('http://127.0.0.1:3000/publish', {}, {
-          validateStatus: () => true,
-        });
+        await axios.post(
+          'http://127.0.0.1:3000/publish',
+          {},
+          {
+            validateStatus: () => true,
+          }
+        );
 
         await sleep(50);
 
@@ -67,8 +74,11 @@ describe('koajs/chat-app', () => {
 
         const messages = await subscribers;
 
-        messages.forEach(response => {
-          expect(response.data, 'каждый подписчик должен получить исходное сообщение').to.equal(message);
+        messages.forEach((response) => {
+          expect(
+            response.data,
+            'каждый подписчик должен получить исходное сообщение'
+          ).to.equal(message);
         });
       });
     });
