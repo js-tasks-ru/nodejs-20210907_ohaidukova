@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const connection = require('../libs/connection');
+import mongoose from 'mongoose';
+import connection from '../libs/connection';
 
 const productSchema = new mongoose.Schema({
   title: {
@@ -29,7 +29,6 @@ const productSchema = new mongoose.Schema({
   },
 
   images: [String],
-
 });
 
-module.exports = connection.model('Product', productSchema);
+export default connection.model('Product', productSchema);
