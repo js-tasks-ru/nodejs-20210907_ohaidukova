@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const connection = require('../libs/connection');
+import mongoose from 'mongoose';
+import connection from '../libs/connection';
 
 const subCategorySchema = new mongoose.Schema({
   title: {
@@ -17,4 +17,4 @@ const categorySchema = new mongoose.Schema({
   subcategories: [subCategorySchema],
 });
 
-module.exports = connection.model('Category', categorySchema);
+export default connection.model('Category', categorySchema);

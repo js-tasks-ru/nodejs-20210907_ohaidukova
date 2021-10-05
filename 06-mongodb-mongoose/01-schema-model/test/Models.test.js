@@ -1,6 +1,6 @@
-const Category = require('../models/Category');
-const Product = require('../models/Product');
-const connection = require('../libs/connection');
+const Category = require('../models/Category').default;
+const Product = require('../models/Product').default;
+const connection = require('../libs/connection').default;
 const mongoose = require('mongoose');
 const expect = require('chai').expect;
 
@@ -14,7 +14,9 @@ describe('mongodb-mongoose/schema-model', () => {
       const fields = Category.schema.obj;
 
       expect(fields, 'у модели есть поле title').to.have.property('title');
-      expect(fields, 'у модели есть поле subcategories').to.have.property('subcategories');
+      expect(fields, 'у модели есть поле subcategories').to.have.property(
+        'subcategories'
+      );
     });
 
     it('поле title имеет правильную конфигурацию', () => {
@@ -40,10 +42,16 @@ describe('mongodb-mongoose/schema-model', () => {
       const fields = Product.schema.obj;
 
       expect(fields, 'у модели есть поле title').to.have.property('title');
-      expect(fields, 'у модели есть поле description').to.have.property('description');
+      expect(fields, 'у модели есть поле description').to.have.property(
+        'description'
+      );
       expect(fields, 'у модели есть поле price').to.have.property('price');
-      expect(fields, 'у модели есть поле category').to.have.property('category');
-      expect(fields, 'у модели есть поле subcategory').to.have.property('subcategory');
+      expect(fields, 'у модели есть поле category').to.have.property(
+        'category'
+      );
+      expect(fields, 'у модели есть поле subcategory').to.have.property(
+        'subcategory'
+      );
       expect(fields, 'у модели есть поле images').to.have.property('images');
     });
 
@@ -58,7 +66,8 @@ describe('mongodb-mongoose/schema-model', () => {
       const description = Product.schema.obj.description;
 
       expect(description.type, 'description - строковое поле').to.eql(String);
-      expect(description.required, 'description - обязательное поле').to.be.true;
+      expect(description.required, 'description - обязательное поле').to.be
+        .true;
     });
 
     it('поле price имеет правильную конфигурацию', () => {
@@ -71,15 +80,20 @@ describe('mongodb-mongoose/schema-model', () => {
     it('поле category имеет правильную конфигурацию', () => {
       const category = Product.schema.obj.category;
 
-      expect(category.type, 'category - ObjectId').to.eql(mongoose.Schema.Types.ObjectId);
+      expect(category.type, 'category - ObjectId').to.eql(
+        mongoose.Schema.Types.ObjectId
+      );
       expect(category.required, 'category - обязательное поле').to.be.true;
     });
 
     it('поле subcategory имеет правильную конфигурацию', () => {
       const subcategory = Product.schema.obj.subcategory;
 
-      expect(subcategory.type, 'subcategory - ObjectId').to.eql(mongoose.Schema.Types.ObjectId);
-      expect(subcategory.required, 'subcategory - обязательное поле').to.be.true;
+      expect(subcategory.type, 'subcategory - ObjectId').to.eql(
+        mongoose.Schema.Types.ObjectId
+      );
+      expect(subcategory.required, 'subcategory - обязательное поле').to.be
+        .true;
     });
 
     it('поле images имеет правильную конфигурацию', () => {
