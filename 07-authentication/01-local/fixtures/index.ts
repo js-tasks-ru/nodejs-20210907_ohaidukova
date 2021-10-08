@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const connection = require('../libs/connection');
-const users = require('../../../data/users');
+import User from '../models/User';
+import connection from '../libs/connection';
+import users from '../../../data/users.json';
 
 (async () => {
   await User.deleteMany();
