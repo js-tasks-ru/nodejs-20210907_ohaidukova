@@ -1,11 +1,11 @@
-const connection = require('../libs/connection');
-const localStrategy = require('../libs/strategies/local');
+const connection = require('../libs/connection').default;
+const localStrategy = require('../libs/strategies/local').default;
 const expect = require('chai').expect;
-const User = require('../models/User');
+const User = require('../models/User').default;
 const users = require('../../../data/users');
 
 describe('authentication/local', () => {
-  describe('passport local strategy', function() {
+  describe('passport local strategy', function () {
     before(async () => {
       await User.deleteMany();
 
@@ -26,13 +26,17 @@ describe('authentication/local', () => {
     });
 
     it('стратегия должна возвращать ошибку если указан несуществующий email', (done) => {
-      localStrategy._verify('notexisting@mail.com', 'pass', (err, user, info) => {
-        if (err) return done(err);
+      localStrategy._verify(
+        'notexisting@mail.com',
+        'pass',
+        (err, user, info) => {
+          if (err) return done(err);
 
-        expect(user).to.be.false;
-        expect(info).to.equal('Нет такого пользователя');
-        done();
-      });
+          expect(user).to.be.false;
+          expect(info).to.equal('Нет такого пользователя');
+          done();
+        }
+      );
     });
 
     it('стратегия должна возвращать ошибку если указан неверный пароль', (done) => {
