@@ -1,4 +1,9 @@
-module.exports = async function handleMongooseValidationError(ctx, next) {
+import Koa from 'koa';
+
+export default async function handleMongooseValidationError(
+  ctx: Koa.Context,
+  next: Koa.Next
+) {
   try {
     await next();
   } catch (err) {
@@ -16,4 +21,4 @@ module.exports = async function handleMongooseValidationError(ctx, next) {
       errors: errors,
     };
   }
-};
+}

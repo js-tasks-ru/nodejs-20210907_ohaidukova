@@ -1,11 +1,11 @@
-const connection = require('../libs/connection');
-const authenticate = require('../libs/strategies/authenticate');
+const connection = require('../libs/connection').default;
+const authenticate = require('../libs/strategies/authenticate').default;
 const expect = require('chai').expect;
-const User = require('../models/User');
+const User = require('../models/User').default;
 const users = require('../../../data/users');
 
 describe('authentication/oauth', () => {
-  describe('функция аутентификации', function() {
+  describe('функция аутентификации', function () {
     before(async () => {
       await User.deleteMany();
 
@@ -36,7 +36,7 @@ describe('authentication/oauth', () => {
         if (err) return done(err);
 
         expect(user.email).to.equal('newuser@mail.com');
-        User.findOne({email: 'newuser@mail.com'}, (err, usr) => {
+        User.findOne({ email: 'newuser@mail.com' }, (err, usr) => {
           if (err) return done(err);
 
           expect(usr.email).to.equal('newuser@mail.com');
