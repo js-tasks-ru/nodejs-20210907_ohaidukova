@@ -1,9 +1,9 @@
-const path = require('path');
-const Koa = require('koa');
-const Router = require('koa-router');
-const handleMongooseValidationError = require('./libs/validationErrors');
-const {login} = require('./controllers/login');
-const {oauth, oauthCallback} = require('./controllers/oauth');
+import path from 'path';
+import Koa from 'koa';
+import Router from 'koa-router';
+import handleMongooseValidationError from './libs/validationErrors';
+import { login } from './controllers/login';
+import { oauth, oauthCallback } from './controllers/oauth';
 
 const app = new Koa();
 
@@ -16,16 +16,16 @@ app.use(async (ctx, next) => {
   } catch (err) {
     if (err.status) {
       ctx.status = err.status;
-      ctx.body = {error: err.message};
+      ctx.body = { error: err.message };
     } else {
       console.error(err);
       ctx.status = 500;
-      ctx.body = {error: 'Internal server error'};
+      ctx.body = { error: 'Internal server error' };
     }
   }
 });
 
-const router = new Router({prefix: '/api'});
+const router = new Router({ prefix: '/api' });
 
 router.post('/login', login);
 
@@ -45,4 +45,4 @@ app.use(async (ctx) => {
   ctx.body = index;
 });
 
-module.exports = app;
+export default app;

@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const mongoose = require('mongoose');
-const users = require('../../../data/users');
+import User from '../models/User';
+import mongoose from 'mongoose';
+import users from '../../../data/users.json';
 
 (async () => {
   await User.deleteMany();
