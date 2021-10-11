@@ -3,4 +3,4 @@
 node_modules
 package-lock.json
 yarn.lock
-/07-authentication/02-oauth/config/config.env
+/07-authentication/**/config.env

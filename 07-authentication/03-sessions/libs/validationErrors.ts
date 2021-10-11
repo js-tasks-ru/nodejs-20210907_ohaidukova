@@ -1,4 +1,4 @@
-module.exports = async function handleMongooseValidationError(ctx, next) {
+const handleMongooseValidationError = async function (ctx, next) {
   try {
     await next();
   } catch (err) {
@@ -17,3 +17,5 @@ module.exports = async function handleMongooseValidationError(ctx, next) {
     };
   }
 };
+
+export default handleMongooseValidationError;

@@ -1,11 +1,16 @@
-module.exports = {
+import dotenv from 'dotenv';
+dotenv.config({ path: __dirname + '/config.env' });
+
+export default {
   mongodb: {
-    uri: (process.env.NODE_ENV === 'test') ?
-      'mongodb://localhost/7-module-3-task' :
-      'mongodb://localhost/any-shop',
+    uri:
+      process.env.NODE_ENV === 'test'
+        ? 'mongodb://localhost/7-module-3-task'
+        : 'mongodb://localhost/any-shop',
   },
+  jwt: process.env.JWT_KEY,
   crypto: {
-    iterations: (process.env.NODE_ENV === 'test' ? 1 : 12000),
+    iterations: process.env.NODE_ENV === 'test' ? 1 : 12000,
     length: 128,
     digest: 'sha512',
   },

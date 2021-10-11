@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Node.JS Course Materials",
   "scripts": {
-    "start": "nodemon --watch '07-authentication/**/*' -e ts,tsx --exec ts-node ./07-authentication/02-oauth/index.ts",
+    "start": "nodemon --watch '07-authentication/**/*' -e ts,tsx --exec ts-node ./07-authentication/03-sessions/index.ts",
     "test": "cross-env NODE_ENV=test mocha -r ts-node/register --no-warnings --ignore=node_modules/** **/*.test.js",
     "lint": "eslint --ignore-pattern 'public' --ignore-pattern '*.test.js' --ignore-pattern 'client' .",
-    "build": "webpack --config 07-authentication/02-oauth/client/webpack.config.js"
+    "build": "webpack --config 07-authentication/03-sessions/client/webpack.config.js"
   },
   "keywords": [],
   "author": "Sergey Zelenov",
@@ -46,6 +46,7 @@
     "cross-env": "^7.0.2",
     "dotenv": "^10.0.0",
     "fs-extra": "^10.0.0",
+    "jsonwebtoken": "^8.5.1",
     "juice": "^8.0.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
