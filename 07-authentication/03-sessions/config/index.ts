@@ -8,7 +8,7 @@ export default {
         ? 'mongodb://localhost/7-module-3-task'
         : 'mongodb://localhost/any-shop',
   },
-  jwt: process.env.JWT_KEY,
+  jwt: process.env.JWT_KEY || 'jwt-key',
   crypto: {
     iterations: process.env.NODE_ENV === 'test' ? 1 : 12000,
     length: 128,
