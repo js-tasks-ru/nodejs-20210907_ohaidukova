@@ -1,20 +1,20 @@
-const app = require('../app');
-const connection = require('../libs/connection');
+const app = require('../app').default;
+const connection = require('../libs/connection').default;
 const mongoose = require('mongoose');
-const User = require('../models/User');
-const Session = require('../models/Session');
-const Message = require('../models/Message');
+const User = require('../models/User').default;
+const Session = require('../models/Session').default;
+const Message = require('../models/Message').default;
 const axios = require('axios');
 const request = axios.create({
   responseType: 'json',
   validateStatus: () => true,
 });
 const expect = require('chai').expect;
-const socket = require('../socket');
+const socket = require('../socket').default;
 const io = require('socket.io-client');
 
 describe('websockets/chat', () => {
-  describe('чат', function() {
+  describe('чат', function () {
     let _socket;
     let _server;
     let client;
@@ -59,7 +59,7 @@ describe('websockets/chat', () => {
       await u.setPassword(userData.password);
       await u.save();
 
-      await Session.create({token: 'token', user: u, lastVisit: new Date()});
+      await Session.create({ token: 'token', user: u, lastVisit: new Date() });
 
       client = io('http://localhost:3000?token=token');
       let resolve;
@@ -83,7 +83,7 @@ describe('websockets/chat', () => {
       await u.setPassword(userData.password);
       await u.save();
 
-      await Session.create({token: 'token', user: u, lastVisit: new Date()});
+      await Session.create({ token: 'token', user: u, lastVisit: new Date() });
 
       client = io('http://localhost:3000?token=token');
       let resolve;
@@ -118,7 +118,7 @@ describe('websockets/chat', () => {
       await u.save();
 
       const d = new Date();
-      await Session.create({token: 'token', user: u, lastVisit: new Date()});
+      await Session.create({ token: 'token', user: u, lastVisit: new Date() });
 
       const message = await Message.create({
         user: u.displayName,
@@ -138,17 +138,19 @@ describe('websockets/chat', () => {
         method: 'get',
         url: 'http://localhost:3001/api/messages',
         headers: {
-          'Authorization': 'Bearer token',
+          Authorization: 'Bearer token',
         },
       });
 
       expect(response.data).to.eql({
-        messages: [{
-          id: message.id,
-          date: d.toISOString(),
-          text: 'hi, how are you doing?',
-          user: 'user',
-        }],
+        messages: [
+          {
+            id: message.id,
+            date: d.toISOString(),
+            text: 'hi, how are you doing?',
+            user: 'user',
+          },
+        ],
       });
     });
 
